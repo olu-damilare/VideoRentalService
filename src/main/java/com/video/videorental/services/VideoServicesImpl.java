@@ -26,7 +26,7 @@ public class VideoServicesImpl implements VideoServices{
     @Autowired
     ModelMapper modelMapper = new ModelMapper();
 
-    private final int paginationSize = 10git ;
+    private final int paginationSize = 10;
 
 
     @Override
