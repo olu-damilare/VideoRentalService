@@ -26,29 +26,8 @@ public class VideoServicesImpl implements VideoServices{
     @Autowired
     ModelMapper modelMapper = new ModelMapper();
 
-    private final int paginationSize = 10;
+    private final int paginationSize = 10git ;
 
-//    @Override
-//    public List<VideoDto> findAllVideos() {
-//        Pageable pageableElements = PageRequest.of(0, paginationSize);
-//        Page<Video> videos = videoRepository.findAll(pageableElements);
-//
-//        return videos.stream()
-//                                            .map(video -> {
-//                                                VideoType videoType = null;
-//                                                String videoTypeData = video.getVideoType();
-//                                                if(videoTypeData.contains("Regular")){
-//                                                    videoType = new Regular();
-//                                                }else if(videoTypeData.contains("Children's Movie")){
-//                                                    videoType = getVideoTypeObject(videoTypeData);
-//                                                }else if(videoTypeData.contains("New Release")) {
-//                                                    videoType = getVideoTypeObject(videoTypeData);
-//                                                }
-//                                                return new VideoDto(video.getTitle(), videoType, video.getGenre());
-//                                            })
-//                                            .collect(Collectors.toList());
-//
-//    }
 
     @Override
     public List<VideoSummaryDto> findAllVideos() {
@@ -183,7 +162,9 @@ public class VideoServicesImpl implements VideoServices{
         }else if(videoType instanceof ChildrenMovie){
             price = videoType.getRate() * priceCalculatorDto.getNumberOfDays() + Integer.parseInt(videoType.getData()) / 2 ;
         }else if(videoType instanceof NewRelease){
-            price = videoType.getRate() * priceCalculatorDto.getNumberOfDays() - Integer.parseInt(videoType.getData());
+            int yearOfRelease = Integer.parseInt(videoType.getData());
+            int releaseDuration = LocalDate.now().getYear() - yearOfRelease;
+            price = videoType.getRate() * priceCalculatorDto.getNumberOfDays() - releaseDuration;
         }
         return price;
     }
