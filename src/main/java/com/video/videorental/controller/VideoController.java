@@ -19,13 +19,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Slf4j
 @RestController
-@RequestMapping("videos")
+@RequestMapping("")
 public class VideoController {
 
     @Autowired
     VideoServices videoServices;
 
-    @PostMapping("")
+    @PostMapping("/save")
     public ResponseEntity<?> saveVideo(@RequestBody VideoSummaryDto videoSummaryDtoDto){
         VideoSummaryDto savedVideo;
         try {
@@ -37,7 +37,7 @@ public class VideoController {
         return new ResponseEntity<>(savedVideo, HttpStatus.CREATED);
     }
 
-    @GetMapping("")
+    @GetMapping("/videos")
     public ResponseEntity<?> findAllVideos(){
         List<VideoSummaryDto> videos = videoServices.findAllVideos()
             .stream()
@@ -53,7 +53,7 @@ public class VideoController {
 
     }
 
-    @GetMapping("/{title}")
+    @GetMapping("/videos/{title}")
     public ResponseEntity<?> getVideoWithPrice(@PathVariable("title") String title) {
         VideoPriceDto videoPriceDto;
 
@@ -68,7 +68,7 @@ public class VideoController {
         }
     }
 
-    @GetMapping("/price")
+    @GetMapping("/videos/price")
     public ResponseEntity<?> getVideoPrice(@RequestBody PriceCalculatorDto priceCalculatorDto){
         VideoDtoForPriceAndUsername videoDtoForPriceAndUsername;
         try{
