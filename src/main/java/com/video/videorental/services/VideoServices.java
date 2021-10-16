@@ -9,11 +9,9 @@ import java.util.List;
 @Service
 public interface VideoServices {
 
-//    List<VideoDto> findAllVideos();
     VideoSummaryDto saveVideo(VideoSummaryDto videoDto) throws VideoRentalException;
     VideoDtoForPriceAndUsername calculatePrice(PriceCalculatorDto priceCalculatorDto);
     VideoPriceDto findVideoWithPriceByTitle(String title);
-//    VideoPrice findVideoById(Long id);
     VideoDto findVideoByTitle(String selectedVideoTitle);
     List<VideoSummaryDto> findAllVideos();
 }
